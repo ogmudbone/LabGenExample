@@ -1,0 +1,278 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<?js
+    includeScript('script/include.js');
+?>
+
+    <head>
+        <title>Lab1</title>
+        <link rel="stylesheet" href="css/Main.css" type="text/css" />
+    </head>
+
+    <body>
+    <?js
+
+
+            var inputMatrix = new Matrix([
+
+                9.5, 1.5, 2.5, 0.5,
+                1.5, 6.5, 3.3, 1,
+                2.5, 3.3, 8,   3,
+                0.5, 1,   3,   2.1
+
+            ], 4);
+
+            var eigenVectors = [
+                new Vector([
+                    -0.57741,  -0.449703,  -0.64124,  -0.230601
+                ]),
+                new Vector([
+                    0.813871,  -0.352782,  -0.407201, -0.217592
+                ]),
+                new Vector([
+                    -0.0282627, -0.817153,   0.489572,  0.302956
+                ]),
+                new Vector([
+                    0.0584194,  0.0746581, -0.428157,  0.898718
+                ]),
+            ];
+
+            ?>
+    <div class="page">
+
+        <h1 class="f-s_14 text_center">
+            Міністерство освіти і науки України<br/>
+            Національний технічний університет України<br/>
+            “Київський політехнічний інститут імені Ігоря Сікорського”
+        </h1>
+        <p class="text_center m-t_5p">Кафедра Прикладної Математики</p>
+        <p class="m-t_20p text_center">Лабораторна робота № 1</p>
+        <p class="text_center">з дисципліни “Методи обчислень”</p>
+
+        <div class="p_10p">
+            <p>
+                <b>Виконав:</b>
+            </p>
+            <p>
+                <b> Студент групи КМ-43 Ігнатьєв Богдан</b>
+            </p>
+            <p class="m-t_30pt">
+                <b>Перевірив:</b>
+            </p>
+            <p>
+                <b>Викладач _______________________ Оцінка ____________ </b>
+            </p>
+        </div>
+
+        <span class="bottom">Київ-2016</span>
+
+    </div>
+
+    <?js
+
+            var pageWidget = new PagesWidget({});
+            pageWidget.next({title : 'ЗАВДАННЯ ДЛЯ ЛАБОРАТОРНОЇ РОБОТИ'});
+    ?>
+
+    <h1>
+        1.	ЗАВДАННЯ ДЛЯ ЛАБОРАТОРНОЇ РОБОТИ
+    </h1>
+
+    <ol>
+        <li>
+            Користуючись теоремою Гершгоріна, знайти область, в яку потрапляють власні числа заданої матриці.
+        </li>
+        <li>
+            Користуючись програмними математичними пакетами, знайти власні пари   матриці.
+        </li>
+        <li>
+            Користуючись QR-алгоритмом, знайти власні числа матриці.
+        </li>
+        <li>
+            Перевірити, чи отримані власні пари дійсно є власними парами заданої матриці.
+        </li>
+        <li>
+            Оформити та захистити отримані результати.
+        </li>
+    </ol>
+
+    <p class="m-t_5p m-b_5p">
+        Варіант 7:
+    </p>
+
+    <?js matrixWidget(inputMatrix, "A=", undefined, {'font-size' : 20}); pageWidget.next({
+            title : 'ЗНАЙТИ ОБЛАСТЬ, В ЯКУ ПОТРАПЛЯЮТЬ ВЛАСНІ ЧИСЛА ЗАДАНОЇ МАТРИЦІ ЗА ТЕОРЕМОЮ ГЕРШГОРІНА'
+            });?>
+
+    <h2>2.	ЗНАЙТИ ОБЛАСТЬ, В ЯКУ ПОТРАПЛЯЮТЬ ВЛАСНІ ЧИСЛА ЗАДАНОЇ МАТРИЦІ ЗА ТЕОРЕМОЮ ГЕРШГОРІНА</h2>
+
+    <p>Розв’язок:</p>
+
+    <p>Маємо квадратну матрицю розмірністю 4х4. Тоді згідно з теоремою Гершгоріна: </p>
+
+    <latex>
+
+        \sum_{j = 1, j\ne i}^n a_{ij} , j=1,...n
+
+    </latex>
+
+    <p>
+        Кожне власне число матриці A знаходиться хоча б в одному з кіл
+    </p>
+
+    <latex>
+
+        \{ z:|z-a_{ii}| \le R_{i} \}, i=1...n.
+
+    </latex>
+    <br/>
+    <?js
+            var profiler = new EquationProfiler();
+            gershgorinCircles(inputMatrix, profiler);
+            gershgorinCirclesWidget(profiler);
+    ?>
+
+    <p>
+        Кола Гершгоріна перетинаються, при цьому всі числа належать відрізку [-5.0 ; 16.8].
+    </p>
+
+    <?js pageWidget.next({title : 'ВИКОРИСТОВУЮЧИ МАТЕМАТИЧНІ ПАКЕТИ ЗНАЙТИ ВЛАСНІ ПАРИ ЗАДАНОЇ МАТРИЦІ'});?>
+
+    <h2>
+        3.	ВИКОРИСТОВУЮЧИ МАТЕМАТИЧНІ ПАКЕТИ ЗНАЙТИ ВЛАСНІ ПАРИ ЗАДАНОЇ МАТРИЦІ
+    </h2>
+
+    <p>
+        Власні числа:
+    </p>
+
+    <img src="images/eigenvalues.jpg"/>
+
+    <p>
+        Відповідні власні вектори:
+    </p>
+
+    <img src="images/eigenvectors.jpg"/>
+
+    <p>Посилання на математичний пакет: </p>
+
+    <a
+        href="http://www.wolframalpha.com/input/?i=eigenvalues%7B%7B9.5,1.5,2.5,0.5%7D,%7B1.5,6.5,3.3,1%7D,%7B2.5,3.3,8,3%7D,%7B0.5,1,3,2.1%7D%7D"
+    >http://www.wolframalpha.com/input/?i=eigenvalues%7B%7B9.5,1.5,2.5,0.5%7D,%7B1.5,6.5,3.3,1%7D,%7B2.5,3.3,8,3%7D,%7B0.5,1,3,2.1%7D%7D</a>
+
+    <?js pageWidget.next({title : 'КОРИСТУЮЧИСЬ QR-АЛГОРИТМОМ, ЗНАЙТИ ВЛАСНІ <br/> ЧИСЛА МАТРИЦІ'});?>
+
+    <h2>
+        4.	КОРИСТУЮЧИСЬ QR-АЛГОРИТМОМ, ЗНАЙТИ ВЛАСНІ ЧИСЛА МАТРИЦІ
+    </h2>
+
+    <h3>І етап.</h3>
+
+    <?js
+            profiler = new EquationProfiler();
+            var resultMatrix = qrAlgorythm(inputMatrix, 0.001, profiler);
+            toTridiagonalWidget(profiler.getSteps('to_tridiagonal'));
+    ?>
+
+    <?js pageWidget.next();?>
+
+    <h3>II етап.</h3>
+
+    <?js
+
+            var qrGivensSteps = profiler.getSteps('qr_givens_reduce');
+            var qrEndSteps = profiler.getSteps('qr_end');
+            var qrIterationSteps = profiler.getSteps('qr_algorythm_iteration');
+
+            var givensStepsIndex = 0;
+            for(var i = 0;i < qrEndSteps.length;i++){
+
+                qrAlgorythmWidget(qrGivensSteps.slice(givensStepsIndex, givensStepsIndex + 3));
+                givensStepsIndex += 3;
+                pageWidget.next();
+                qrAlgorythmWidget(qrEndSteps.slice(i, i+1));
+                qrAlgorythmWidget(qrIterationSteps.slice(i, i+1));
+                if(i+1 < qrEndSteps.length)
+                    pageWidget.next();
+            }
+
+     ?>
+
+    <p>
+        На цьому етапі я припинив розрахунки. Задана точність досягнута.
+        Власні числа збігаються з тими, які були зайдені за допомогою ресурсу wolframalfa
+    </p>
+    <p>
+        Відповідь:
+    </p>
+
+    <?js var processedResult = normalizeNumbers(resultMatrix.toArray());
+            var eigenvalues = [
+                processedResult[0][0], processedResult[1][1],
+                processedResult[2][2], processedResult[3][3]
+            ];
+            ?>
+
+    <latex>
+        \lambda_{1} = <% eigenvalues[0] %>, \lambda_{2} = <% eigenvalues[1] %>,
+        \lambda_{3} = <% eigenvalues[2] %>, \lambda_{4} = <% eigenvalues[3] %>
+    </latex>
+
+    <p>
+        З точністю <latex font-size="20">\epsilon = 0.001</latex>
+    </p>
+
+    <?js pageWidget.next({
+        title : 'ПЕРЕВІРКА НА ПРАВИЛЬНІСТЬ ЗНАЙДЕНИХ ПАР <br/> ЗАДАНОЇ МАТРИЦІ'
+    });?>
+
+    <h2>
+        5.	ПЕРЕВІРКА НА ПРАВИЛЬНІСТЬ ЗНАЙДЕНИХ ПАР ЗАДАНОЇ МАТРИЦІ
+    </h2>
+
+    <p>Перевірка за формулою: </p>
+
+    <latex>
+        Ax = \lambda x
+    </latex>
+
+    <?js
+
+            for(var i = 0;i < 4;i++){
+
+                var matrixOnVectorResult   = inputMatrix.multiply(eigenVectors[i]);
+                var eigenValOnVectorResult = eigenVectors[i].multiply(eigenvalues[i]);
+
+                if(i == 2)
+                    pageWidget.next();
+
+                echo('<p>Перевірка ' + (i + 1) + ' пари:</p>');
+                eigenCheckWidget({
+                    index            : i,
+                    eigenVector      : eigenVectors[i],
+                    eigenValue       : eigenvalues[i],
+                    inputMatrix      : inputMatrix,
+                    withMatrixResult : matrixOnVectorResult,
+                    withValueResult  : eigenValOnVectorResult
+                });
+
+            }
+
+    ?>
+
+    <?js pageWidget.next({
+        title : 'ВИСНОВОК'
+    });?>
+
+    <h1 class="text_center">ВИСНОВОК</h1>
+    <p>
+        Під час виконання лабораторної роботи я навчився знаходити область,
+        в яку потрапляють власні числа заданої матриці за теоремою Гершгоріна.
+        За допомогою математичних пакетів, а також онлайн ресурсу wolframalpha,
+        знайшов власні пари для заданої матриці. Користуючись QR алгоритм, знайшов
+        власні числа матриці. Перевірив на правильність знайдені власні пари.
+    </p>
+    <?js pageWidget.end();?>
+    </body>
+
+</html>

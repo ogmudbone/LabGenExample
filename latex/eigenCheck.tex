@@ -1,0 +1,35 @@
+A * V_{<% index + 1 %>} =
+\begin{pmatrix}
+    {% for row in inputMatrix  %}
+        {% for element in row %}
+            <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+        {% endfor %}
+        \\
+    {% endfor %}
+\end{pmatrix} *
+\begin{pmatrix}
+    {% for element in eigenVector  %}
+        <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+        \\
+    {% endfor %}
+\end{pmatrix} =
+\begin{pmatrix}
+    {% for element in withMatrixResult  %}
+        <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+        \\
+    {% endfor %}
+\end{pmatrix}
+\\
+\lambda * V_{<% index + 1 %>} = <% eigenValue %> *
+\begin{pmatrix}
+    {% for element in eigenVector  %}
+        <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+        \\
+    {% endfor %}
+\end{pmatrix} =
+\begin{pmatrix}
+    {% for element in withValueResult  %}
+        <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+        \\
+    {% endfor %}
+\end{pmatrix}

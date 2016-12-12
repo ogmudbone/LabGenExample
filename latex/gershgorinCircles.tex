@@ -1,0 +1,10 @@
+{% for step in steps %}
+
+R_{<% step.index + 1 %>} = {% for number in step.rNumbers %}
+    |<% number %>|
+        {% if (loop.last) %} {% else %} + {% endif %}
+    {% endfor %}
+    = <% step.R %>, |z-<% step.a %>| \le <% step.R %> \Rightarrow \lambda \in [<%step.range[0]%> ; <%step.range[1]%>]
+    \\
+
+{% endfor %}

@@ -1,0 +1,22 @@
+<div class="page">
+
+    <h2 class="text_center">
+        ЗМІСТ
+    </h2>
+
+    <ol class="title">
+        {% for title in titleItems %}
+
+            <li>
+                <span class="title_item">
+                    <% title.title %>
+                </span>
+                <span class="title_item_number">
+                    <% title.page + 0 %>
+                </span>
+            </li>
+
+        {% endfor %}
+    </ol>
+
+</div>

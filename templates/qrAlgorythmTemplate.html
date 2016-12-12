@@ -1,0 +1,138 @@
+{% for step in steps %}
+
+{% if (step.action == 'qr_givens_reduce') %}
+
+<latex>
+
+    s=\frac{h_{<%step.first_index_i + 1%><%step.first_index_j + 1%>}}
+    {\sqrt{h_{<%step.first_index_i + 1%><%step.first_index_j + 1%>}^2+h_{<%step.second_index_i + 1%><%step.second_index_j + 1%>}^2}}=
+
+    \frac{<%step.first_value%>}{\sqrt{<%step.first_value%>^2+<%step.second_value%>^2}}=<%step.s%>
+
+</latex>
+<br/>
+<latex>
+
+    c=\frac{h_{<%step.second_index_i + 1%><%step.second_index_j + 1%>}}
+    {\sqrt{h_{<%step.first_index_i + 1%><%step.first_index_j + 1%>}^2+h_{<%step.second_index_i + 1%><%step.second_index_j + 1%>}^2}}=
+
+    \frac{<%step.second_value%>}{\sqrt{<%step.first_value%>^2+<%step.second_value%>^2}}=<%step.c%>
+
+</latex>
+
+<latex>
+
+    R_{<%step.index + 1%>} = \begin{pmatrix}
+    {% for row in step.givens_matrix_transpose  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix} *
+    \begin{pmatrix}
+    {% for row in step.initial_matrix  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}  = \\
+    \begin{pmatrix}
+    {% for row in step.result_matrix  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}
+
+</latex>
+
+{% endif %}
+
+{% if (step.action == 'qr_end') %}
+
+<latex>
+
+    R =  \begin{pmatrix}
+    {% for row in step.R  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}
+
+</latex>
+
+<latex>
+
+    Q =  \begin{pmatrix}
+    {% for row in step.qMatrixes[0]  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix} * \begin{pmatrix}
+    {% for row in step.qMatrixes[1]  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}*  \\
+    \begin{pmatrix}
+    {% for row in step.qMatrixes[2]  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix} =
+    \begin{pmatrix}
+    {% for row in step.Q  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}
+
+</latex>
+
+{% endif %}
+
+{% if(step.action == 'qr_algorythm_iteration') %}
+<latex>
+
+    H_{<% step.iteration + 1 %>} = \begin{pmatrix}
+    {% for row in step.R  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix} * \begin{pmatrix}
+    {% for row in step.Q  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix} = \\
+    \begin{pmatrix}
+    {% for row in step.result  %}
+    {% for element in row %}
+    <%element%> {% if (loop.last) %} {% else %} & {% endif %}
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{pmatrix}
+
+</latex>
+
+{% endif %}
+
+{% endfor %}
